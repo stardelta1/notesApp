@@ -4,8 +4,10 @@ class NotesApplication {
 		this.notes = [];
 	}
 	
-	create (note) {
-		this.notes[note] = note;
+	create (note_content) {
+		this.notes[note] = note.length;
+		note_author = this author;
+		this.note.push({notes_id: note_id, note_content: note_content, note_author: note_author)
 	}
 	
 	listNotes () {
