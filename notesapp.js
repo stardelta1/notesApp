@@ -1,14 +1,14 @@
 /**
- * The Note class holds a constructor
- * that always help in creating the 
- * autor and the note content 
- * whenever the Mote class is created
- * @
- * It uses the NotesApplication class
+ * Note class to create notes
+ * @class
+ * @constructor
+ * @param {string} author The authors name
+ * @param {string} note_content The contents of the note
  * 
 */
 class Note {
 	constructor (author, note_content) {
+		this.id = null;
 		this.author = author;
 		this.note_content = note_content;
 	}	
@@ -16,8 +16,11 @@ class Note {
 }
 
 /**
- * NotesApplication holds all the method of a NotesApplication
- * And it creates a constructor that holds an array of notes and their author
+ * Class that holds all the methos that can be
+ * 		perform on the NotesApplication
+ * @Class
+ * @constructor
+ * @param {string} author The author of the contents
  * 
 */
 class NotesApplication {
@@ -25,65 +28,120 @@ class NotesApplication {
 		this.author = author;
 		this.notes = [];
 	}
+	
 	/**
-	 * We create a new note contents and the author of the note_content
-	 * this content is added to the the notes array next index
+	 * Function that creates a new note
+	 * @function 
+	 * @param {string} author Author of the new note to 
+	 * 		be created
+	 * @param {string} note_content contents of the new note
+	 * 
 	*/	
 	createNote (author, note_content) {
 		var newNote = new Note(author, note_content);
-		this.notes[this.notes.length] = newNote;
+	
+		if(author, note_content) {
+			return this.notes.push(newNote);
+		}
 		
 	}
+	
 	/**
 	 * List and dispalys all the note.
-	 * a For loop goes through the notes array and displays it ID, Contents and Author
+	 * @function
 	*/
 	listNotes () {
+		
 		for (var i = 0; i < this.notes.length; i+=1) {
-			console.log ("Note ID: "+i+" \n"+this.notes[i].note_content+"\n\nBy Author "+this.notes[i].author);
+			var output = this.displayNoteContent(i);
+			console.log(output);
 		} 
+		if(output !== null){
+			//Do nothing
+		}else {
+			console.log( "List note is empty");
+		}
 		
 	}
+	
 	/**
-	 * This is used to get a note by it ID
+	 * Get note
+	 * @function
 	*/
 	getNote (note_id) {
-		return this.notes[note_id].note_content;
+		if(note_id)
+			console.log(this.notes[note_id].note_content);
+		else
+			console.log("Note not found");
 	}
-	/**To search note, a For is used to loop through the notes array
-	 * a condition is used to check if the notes contents includes the search search_textit gives a boolean true. the we display all the information of that note.
+	
+	/**
+	 * Search Note contents
+	 * @function
+	 * @param {string} search_text Search note for
 	*/
-	searchNote(search_text) {
+	searchNote (search_text) {
+		var result;
 		for (var i =0; i < this.notes.length; i+=1 ){
 			if (this.notes[i].note_content.includes(search_text) === true) {
-				console.log("Showing results for search <"+ search_text +">\n\n"+ "Note ID: "+i+" \n"+this.notes[i].note_content+"\n\nBy Author "+this.notes[i].author );
+				result = "Showing results for search <"+ search_text +">\n";
+				result += this.displayNoteContent(i);
 			}
 		}
+		console.log(result);
 	}
-	/**Used to delete a note aslong as a note id id provided
+	
+	/**
+	 * Used to delete a note 
+	 * @function
+	 * @param {number} note_id ID of note to delete
 	*/
 	deleteNote (note_id) {
 		if (note_id) {
-			this.notes[note_id] = null;
+			 console.log(this.notes[note_id] = null);
 		}
-		
-		
 	}
-	/**This is uded to edit the contents of a note. 
-	 * we pass the ID of the contented to be edited and the new_content
+	/**
+	 * Edit the contents of a note. 
+	 * @function
+	 * @param {number} note_id ID of note 
+	 * @param {string} new_content New contents
 	*/
 	editNote (note_id, new_content) {
 		if (note_id) {
-			this.notes[note_id].note_content = new_content;
+			 console.log(this.notes[note_id] = null);
 		}
+	}
+
+	/**
+	 * Display Note Content . 
+	 * @function
+	 * @param {number} note_id ID of note 
+	*/
+	displayNoteContent (id) {
+		var disContent;
+		disContent = "Note ID: " + id + "\n" + this.notes[id].note_content;
+		disContent+= "\nBy Author " + this.notes[id].author+ "\n\n";
+		//console.log(disContent);
+		return disContent;
 	}
 }
 
+var note = new NotesApplication("Sylvester");
+console.log(note.createNote("Sylvester", "In Andela BootCamp"));
+// note.createNote("Sylvester", "In Andela BootCamp");
+// note.createNote("Sylvester", "In Andela BootCamp");
+// console.log(note.createNote("g--ramos", "Code Moster"));
+// note.listNotes();
+// note.searchNote("Andela");
+// note.searchNote("Code");
+note.editNote(0, "Code gru");
 
-var note = new NotesApplication();
-note.createNote("Sylvester", "In Andela BootCamp")
-console.log(note.createNote("g--ramos", "Code Moster"));
-note.listNotes();
-note.searchNote("Code");
+// var note2 = new NotesApplication("Bayo");
+// console.log(note2.createNote("Bayo", "The great guy"));
+// console.log(note2.createNote("Albert", "Genius redefined"));
+// note2.listNotes();
+// note2.searchNote("great");
+
 
 
